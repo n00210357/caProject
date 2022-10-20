@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\train;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TrainController extends Controller
 {
@@ -13,7 +15,7 @@ class TrainController extends Controller
      */
     public function index()
     {
-        $trains = Train::where('user_id', Auth::id())->latest('updated_at')->paginate(1);
+        $trains = train::where('user_id', Auth::id())->latest('updated_at')->paginate(1);
         return view('trains.index')->with('trains', $trains);
     }
 
