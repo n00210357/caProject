@@ -36,7 +36,7 @@
                 </div>
             @endif
 
-                     <h1> cargo </h1>
+                     <h1 class="text-5x1"> cargo </h1>
 
             </div>
         </div>
