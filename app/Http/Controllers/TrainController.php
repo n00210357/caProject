@@ -17,7 +17,7 @@ class TrainController extends Controller
      // The part of the controller that sends the user and their select data to the index page
     public function index()
     {
-        $trains = train::where('user_id', Auth::id())->latest('updated_at')->paginate(1);
+        $trains = train::where('id', Auth::id())->latest('updated_at')->paginate(1);
         return view('trains.index')->with('trains', $trains);
     }
 
