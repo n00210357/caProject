@@ -16,6 +16,7 @@ class trainFactory extends Factory
      *
      * @return array<string, mixed>
      */
+    //allow user to flood database with fake info when run with seeder
     public function definition()
     {
         return [

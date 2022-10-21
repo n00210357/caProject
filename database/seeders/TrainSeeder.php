@@ -13,6 +13,7 @@ class TrainSeeder extends Seeder
      *
      * @return void
      */
+    //runs trainFactory.php when called in terminal
     public function run()
     {
         train::factory()->times(10)->create();
