@@ -17,7 +17,7 @@ class TrainController extends Controller
      // The part of the controller that sends the user and their select data to the index page
     public function index()
     {
-        $trains = train::where('id', Auth::id())->latest('updated_at')->paginate(1);
+        $trains = train::where('user_id', Auth::id())->latest('updated_at')->paginate(5);
         return view('trains.index')->with('trains', $trains);
     }
 
@@ -28,7 +28,7 @@ class TrainController extends Controller
      */
     public function create()
     {
-        //
+        return view('trains.create');
     }
 
     /**
@@ -39,7 +39,15 @@ class TrainController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'id' => Auth::id(),
+            'name' => $request->title,
+            'cargo' => $request->text,
+
+            //$table->string('image');
+            //$table->decimal('cost');
+           // $table->integer('destination');
+        ]);
     }
 
     /**

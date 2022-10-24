@@ -20,6 +20,7 @@ class trainFactory extends Factory
     public function definition()
     {
         return [
+            'user_id' => 1,
             'name' => $this->faker->name(),
             'cargo' => $this->faker->text(),
             'image' => "public\images\train_placeholde.jpg",

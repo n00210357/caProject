@@ -14,7 +14,7 @@
                         <a href="{{ route('trains.show', $train->id) }}"> {{$train->name}}</a>
                     </h2>
                     <p class="mt-2">
-                       {{Str::limit($train->destination), 200}}
+                       {{Str::limit($train->text), 200}}
                     </p>
                     <span class="block mt-4 text-sm opacity-70"> {{$train->updated_at->diffForHumans()}}</span>
                 </div>
