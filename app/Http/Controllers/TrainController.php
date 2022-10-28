@@ -40,14 +40,15 @@ class TrainController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id' => Auth::id(),
-            'name' => $request->title,
-            'cargo' => $request->text,
-
-            //$table->string('image');
-            //$table->decimal('cost');
-           // $table->integer('destination');
+            'user_id' => 'required|UUID',
+            'name' => 'required|max:120',
+            'cargo' => 'required',
+            'image' => 'required',
+            'cost' => 'required|between:0,9999.99',
+            'destination' => 'required|integer',
         ]);
+
+        //return to_route('trains.index');
     }
 
     /**
