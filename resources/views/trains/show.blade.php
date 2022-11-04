@@ -15,6 +15,8 @@
                 <p class="opacity-70 ml-8">
                     <strong>Updated at: </strong> {{$train->updated_at->diffForHumans()}}
                 </p>
+
+                <a href="{{ route('trains.edit', $train) }}" class="btn-link ml-auto">Edit Train</a>
             </div>
 
                 <div class="p-6 bg-white border-b border-gray-200 shadow-sj sm:rounded-lg">

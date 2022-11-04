@@ -83,9 +83,14 @@ class TrainController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Train $train)
     {
-        //
+        if ($train->user_id != Auth::id())
+        {
+            return abort(403);
+        }
+
+        return view('trains.edit')->with('train', $train);
     }
 
     /**
@@ -95,9 +100,30 @@ class TrainController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Train $train)
     {
-        //
+        if ($train->user_id != Auth::id())
+        {
+            return abort(403);
+        }
+
+        $request->validate([
+            'name' => 'required|max:120',
+            'cargo' => 'required',
+            'image' => 'required',
+            'cost' => 'required|between:0,9999.99',
+            'destination' => 'required|integer',
+        ]);
+
+        $train->update([
+            'name' => $request->name,
+            'cargo' => $request->cargo,
+            'image' => $request->image,
+            'cost' => $request->cost,
+            'destination' => $request->destination
+        ]);
+
+        return to_route('trains.show', $train);
     }
 
     /**
