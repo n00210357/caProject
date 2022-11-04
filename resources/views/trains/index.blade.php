@@ -11,7 +11,7 @@
             @forelse ($trains as $train)
                 <div class="p-6 bg-white border-b border-gray-200 shadow-sj sm:rounded-lg">
                     <h2>
-                        <a href="{{ route('trains.show', $train->uuid) }}"> {{$train->name}}</a>
+                        <a href="{{ route('trains.show', $train) }}"> {{$train->name}}</a>
                     </h2>
                     <p class="mt-2">
                        {{Str::limit($train->cargo), 200}}

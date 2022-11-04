@@ -67,9 +67,13 @@ class TrainController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($uuid)
+    public function show(Train $train)
     {
-        $train = Train::where('uuid', $uuid)->where('user_id', Auth::id())->firstOrFail();
+        if ($train->user_id != Auth::id())
+        {
+            return abort(403);
+        }
+
         return view('trains.show')->with('train', $train);
     }
 
