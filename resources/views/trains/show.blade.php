@@ -7,6 +7,10 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <x-alert-success>
+                {{session('success')}}
+            </x-alert-success>
+
             <div class ="flex">
                 <p class="opacity-70">
                     <strong>Created: </strong> {{$train->created_at->diffForHumans()}}
@@ -17,7 +21,13 @@
                 </p>
 
                 <a href="{{ route('trains.edit', $train) }}" class="btn-link ml-auto">Edit Train</a>
-            </div>
+
+                <form action="{{ route('trains.destroy', $train) }}" method="post">
+                    @method('delete')
+                    @csrf
+                    <button type="submit" class="btn btn-danger ml-4" onclick="return confirm('Are you sure')">Delete Train</button>
+                </form>
+                </div>
 
                 <div class="p-6 bg-white border-b border-gray-200 shadow-sj sm:rounded-lg">
                     <h2>

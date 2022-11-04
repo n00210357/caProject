@@ -123,7 +123,7 @@ class TrainController extends Controller
             'destination' => $request->destination
         ]);
 
-        return to_route('trains.show', $train);
+        return to_route('trains.show', $train)->with('success', 'Train updated');
     }
 
     /**
@@ -132,8 +132,15 @@ class TrainController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Train $train)
     {
-        //
+        if ($train->user_id != Auth::id())
+        {
+            return abort(403);
+        }
+
+        $train->delete();
+
+        return to_route('trains.index')->with('success', 'Train deleted');
     }
 }
