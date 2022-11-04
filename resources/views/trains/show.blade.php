@@ -38,6 +38,17 @@
                        {{$train->cargo}}
                     </p>
 
+                    <p class="mt-6 whitespace-pre-wrap">
+                        {{$train->image}}
+                     </p>
+
+                     <p class="mt-6 whitespace-pre-wrap">
+                        {{$train->cost}}
+                     </p>
+
+                     <p class="mt-6 whitespace-pre-wrap">
+                        {{$train->destination}}
+                     </p>
 
                 </div>
             </div>
