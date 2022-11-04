@@ -20,6 +20,7 @@ class trainFactory extends Factory
     public function definition()
     {
         return [
+            'uuid' => Str::uuid(),
             'user_id' => 1,
             'name' => $this->faker->name(),
             'cargo' => $this->faker->text(),

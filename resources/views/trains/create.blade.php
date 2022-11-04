@@ -15,10 +15,7 @@
                     @endforeach
 
                     <form action="{{ route('trains.store')}}" method="post">
-                        <x-input type="number" name="user_id" placeholder="user_id" class="w-full" autocomplete="off"></x-input>
-                        @error('user_id')
-                        <div class="text-red-600 text-sm">{{$message}}</div>
-                        @enderror
+                        @csrf
 
                         <x-input type="text" name="name" placeholder="Title" class="w-full" autocomplete="off"></x-input>
                         @error('name')

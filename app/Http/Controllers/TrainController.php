@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\train;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class TrainController extends Controller
 {
@@ -40,7 +41,6 @@ class TrainController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'user_id' => 'required|UUID',
             'name' => 'required|max:120',
             'cargo' => 'required',
             'image' => 'required',
@@ -48,7 +48,17 @@ class TrainController extends Controller
             'destination' => 'required|integer',
         ]);
 
-        //return to_route('trains.index');
+        Train::create([
+            'uuid' => Str::uuid(),
+            'user_id' => Auth::id(),
+            'name' => $request->name,
+            'cargo' => $request->cargo,
+            'image' => $request->image,
+            'cost' => $request->cost,
+            'destination' => $request->destination
+        ]);
+
+        return to_route('trains.index');
     }
 
     /**
@@ -57,9 +67,10 @@ class TrainController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($uuid)
     {
-        //
+        $train = Train::where('uuid', $uuid)->where('user_id', Auth::id())->firstOrFail();
+        return view('trains.show')->with('train', $train);
     }
 
     /**
