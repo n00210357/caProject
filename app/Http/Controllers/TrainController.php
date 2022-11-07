@@ -53,17 +53,17 @@ class TrainController extends Controller
         $request->validate([
             'name' => 'required|max:120',
             'cargo' => 'required',
-            'image' => 'required',
+            //'image' => 'required',
             'cost' => 'required|between:0,9999.99',
             'destination' => 'required|integer',
         ]);
 
-        //$image = $request->file('image');
-        //$extension = $image->getClientOriginalExtension();
+        $image = $request->file('image');
+        $extension = $image->getClientOriginalExtension();
 
-        //$filename = date('Y-m-d-His') . '_' . $request->input('title') . '.' . $extension;
+        $filename = date('Y-m-d-His') . '_' . $request->input('title') . '.' . $extension;
 
-        //$path = $image->storeAs('public/images', $filename);
+        $path = $image->storeAs('public/images', $filename);
 
         //uses the new data to create a new train in the train table
         Train::create([
