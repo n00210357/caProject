@@ -58,6 +58,13 @@ class TrainController extends Controller
             'destination' => 'required|integer',
         ]);
 
+        //$image = $request->file('image');
+        //$extension = $image->getClientOriginalExtension();
+
+        //$filename = date('Y-m-d-His') . '_' . $request->input('title') . '.' . $extension;
+
+        //$path = $image->storeAs('public/images', $filename);
+
         //uses the new data to create a new train in the train table
         Train::create([
             'uuid' => Str::uuid(),

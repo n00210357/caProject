@@ -14,7 +14,7 @@
                     <p> {{$error}}</p>
                     @endforeach
 
-                    <form action="{{ route('trains.store')}}" method="post">
+                    <form action="{{ route('trains.store')}}" method="post" enctype="multipart/form-data">
                         @csrf
 
                         <x-input type="text" name="name" placeholder="Title" class="w-full" autocomplete="off"></x-input>
@@ -27,7 +27,7 @@
                         <div class="text-red-600 text-sm">{{$message}}</div>
                         @enderror
 
-                        <x-textarea name="image" rows="10" placeholder="Start typing" class="w-full mt-6"></x-textarea>
+                        <x-text-input name="image" rows="10" placeholder="image" class="w-full mt-6" field="train_image"></x-text-input>
                         @error('image')
                         <div class="text-red-600 text-sm">{{$message}}</div>
                         @enderror

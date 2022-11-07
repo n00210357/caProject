@@ -28,28 +28,31 @@
                     <button type="submit" class="btn btn-danger ml-4" onclick="return confirm('Are you sure')">Delete Train</button>
                 </form>
                 </div>
+                <table>
+                    <tbody>
 
                 <div class="p-6 bg-white border-b border-gray-200 shadow-sj sm:rounded-lg">
                     <h2>
                     {{$train->name}}
                     </h2>
 
-                    <p class="mt-6 whitespace-pre-wrap">
+                    <p class="whitespace-pre-wrap">
+                    <img src="{{url('/images/'. $train->image)}}" alt="Image" width="200px"/>
+                    </p>
+
+                    <p class="whitespace-pre-wrap">
                        {{$train->cargo}}
                     </p>
 
-                    <p class="mt-6 whitespace-pre-wrap">
-                        {{$train->image}}
-                     </p>
-
-                     <p class="mt-6 whitespace-pre-wrap">
+                     <p class="whitespace-pre-wrap">
                         {{$train->cost}}
                      </p>
 
-                     <p class="mt-6 whitespace-pre-wrap">
+                     <p class="whitespace-pre-wrap">
                         {{$train->destination}}
                      </p>
-
+                    </tbody>
+                     <table>
                 </div>
             </div>
         </div>

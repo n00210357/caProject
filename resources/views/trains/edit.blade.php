@@ -16,18 +16,13 @@
 
                         <x-input type="text" name="name" placeholder="Title" class="w-full" autocomplete="off" :value="@old('title', $train->name)"></x-input>
 
+                        <x-textarea name="cargo" rows="10" placeholder="Start typing" class="w-full mt-6" value="{{@old('cargo', $train->cargo)}}"></x-textarea>
 
-                        <x-textarea name="cargo" rows="10" field="text" placeholder="Start typing" class="w-full mt-6" :value="@old('cargo', $train->cargo)"></x-textarea>
-
-
-                        <x-textarea name="image" rows="10" field="text" placeholder="Start typing" class="w-full mt-6" :value="@old('image', $train->image)"></x-textarea>
-
+                        <x-input name="image" rows="10" placeholder="Start typing" class="w-full mt-6" :value="@old('image', $train->image)"></x-input>
 
                         <x-input type="number" name="cost" placeholder="price" class="w-full" autocomplete="off" :value="@old('cost', $train->cost)"></x-input>
 
-
                         <x-input type="number" name="destination" placeholder="local" class="w-full" autocomplete="off" :value="@old('destination', $train->destination)"></x-input>
-
 
                         <button class="my-6"> Save Train</button>
                     </form>
