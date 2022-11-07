@@ -17,6 +17,17 @@ class trainFactory extends Factory
      * @return array<string, mixed>
      */
     //allow user to flood database with fake info when run with seeder
+
+    /*
+    this is were seeder gets the random values when it fills the database with fake info
+    uuid is filled with a random uuid
+    user_id is hard coded to be user 1
+    name uses faker name making it a random name
+    cargo uses faker text giving it some random text
+
+    cost uses faker random float 2 which is meant to fill it with a random float with up to point two digits but it usally comes up with an out of cost bounds error that stops the seeding process but still fills in the prevously valid ones
+    destination uses faker random digit not 2 which makes it a random single digit number (0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
+    */
     public function definition()
     {
         return [

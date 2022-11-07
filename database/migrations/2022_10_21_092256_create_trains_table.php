@@ -11,6 +11,8 @@ return new class extends Migration
      *
      * @return void
      */
+
+     //creates the table in the database called trains and it has an id, uuid, user_id, name, cargo, image, cost and destination along with a time stamp of when it was made
     public function up()
     {
         Schema::create('trains', function (Blueprint $table) {
@@ -31,6 +33,8 @@ return new class extends Migration
      *
      * @return void
      */
+
+     //this drops the table trains if it exist already with in the database
     public function down()
     {
         Schema::dropIfExists('trains');

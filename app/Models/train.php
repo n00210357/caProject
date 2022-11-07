@@ -7,12 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class train extends Model
 {
+    //allows the use of factory
     use HasFactory;
 
+    //grants basic protection
     protected $guarded = [];
 
+    //gets key / uuid
     public function getRouteKeyName()
     {
+        //returns the uuid at the top of the page as appose to the trains id
         return 'uuid';
     }
 }
