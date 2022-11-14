@@ -11,23 +11,6 @@
                 {{session('success')}}
             </x-alert-success>
 
-            <div class ="flex">
-                <p class="opacity-70">
-                    <strong>Created: </strong> {{$train->created_at->diffForHumans()}}
-                </p>
-
-                <p class="opacity-70 ml-8">
-                    <strong>Updated at: </strong> {{$train->updated_at->diffForHumans()}}
-                </p>
-
-                <a href="{{ route('trains.edit', $train) }}" class="btn-link ml-auto">Edit Train</a>
-
-                <form action="{{ route('trains.destroy', $train) }}" method="post">
-                    @method('delete')
-                    @csrf
-                    <button type="submit" class="btn btn-danger ml-4" onclick="return confirm('Are you sure')">Delete Train</button>
-                </form>
-                </div>
                 <table>
                     <tbody>
 

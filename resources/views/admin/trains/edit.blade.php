@@ -10,7 +10,7 @@
 
                 <div class="p-6 bg-white border-b border-gray-200 shadow-sj sm:rounded-lg">
 
-                    <form action="{{ route('trains.update', $train)}}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('admin.trains.update', $train)}}" method="post" enctype="multipart/form-data">
                         @method('put')
                         @csrf
 

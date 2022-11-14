@@ -36,7 +36,7 @@ class trainFactory extends Factory
             'name' => $this->faker->name(),
             'cargo' => $this->faker->text(),
             'image' => $this->faker->randomElement(['T1.jpg', 'T2.jpg', 'T3.jpg']),
-            'cost' => $this->faker->randomFloat(2),
+            'cost' => $this->faker->randomFloat(1),
             'destination' => $this->faker->randomDigitNot(2),
         ];
     }

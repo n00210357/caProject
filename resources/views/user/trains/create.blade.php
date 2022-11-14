@@ -14,7 +14,7 @@
                     <p> {{$error}}</p>
                     @endforeach
 
-                    <form action="{{ route('trains.store')}}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('user.trains.store')}}" method="post" enctype="multipart/form-data">
                         @csrf
 
                         <x-input type="text" name="name" placeholder="Title" class="w-full" autocomplete="off"></x-input>

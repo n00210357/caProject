@@ -11,7 +11,7 @@
                 {{session('success')}}
             </x-alert-success>
 
-            <a href="{{ route('trains.create') }}" class="btn-link btn-lg mb-2">+ New Train</a>
+            <a href="{{ route('admin.trains.create') }}" class="btn-link btn-lg mb-2">+ New Train</a>
             @forelse ($trains as $train)
                 <div class="p-6 bg-white border-b border-gray-200 shadow-sj sm:rounded-lg flex">
                     <div>
@@ -22,7 +22,7 @@
 
                     <div>
                     <h2>
-                        <a href="{{ route('trains.show', $train) }}"> {{$train->name}}</a>
+                        <a href="{{ route('admin.trains.show', $train) }}"> {{$train->name}}</a>
                     </h2>
 
                     <p class="mt-2">
