@@ -22,7 +22,14 @@
 
                         <x-input type="number" name="cost" placeholder="price" class="w-full" autocomplete="off" :value="@old('cost', $train->cost)"></x-input>
 
-                        <x-input type="number" name="destination_id" placeholder="local" class="w-full" autocomplete="off" :value="@old('destination_id', $train->destination_id)"></x-input>
+                        <label for="destination">Destination</label>
+                        <select name="destination_id">
+                        @foreach($destination as $desination)
+                        <option value="{{$desination->id}}" {{(old('destination_id') == $desination->id) ? "selected" : ""}}>
+                            {{$desination->location}}
+                        </option>
+                        @endforeach
+                        </select>
 
                         <button class="my-6"> Save Train</button>
                     </form>

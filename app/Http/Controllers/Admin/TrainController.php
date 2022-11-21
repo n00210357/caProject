@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\destination;
 use App\Models\train;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -47,7 +48,8 @@ class TrainController extends Controller
         $user->authorizeRoles('admin');
 
         //sends the user to the create page
-        return view('admin.trains.create');
+        $destination = destination::all();
+        return view('admin.trains.create')->with('destination', $destination);
     }
 
     /**
@@ -91,7 +93,8 @@ class TrainController extends Controller
         ]);
 
         //brings the user to the index page
-        return to_route('admin.trains.index');
+        $destination = destination::all();
+        return to_route('admin.trains.index')->with('destination',$destination);
     }
 
     /**
@@ -138,7 +141,8 @@ class TrainController extends Controller
         }
 
         //opens up the edit page for the user with their selected train
-        return view('admin.trains.edit')->with('train', $train);
+        $destination = destination::all();
+        return view('admin.trains.edit')->with('train', $train)->with('success', 'Train updated')->with('destination',$destination);
     }
 
     /**
@@ -180,7 +184,8 @@ class TrainController extends Controller
         ]);
 
         //returns the user to show page and plays the success message Train updated
-        return to_route('admin.trains.show', $train)->with('success', 'Train updated');
+        $destination = destination::all();
+        return to_route('admin.trains.show', $train)->with('success', 'Train updated')->with('destination',$destination);
     }
 
     /**

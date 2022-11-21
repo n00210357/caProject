@@ -37,10 +37,14 @@
                         <div class="text-red-600 text-sm">{{$message}}</div>
                         @enderror
 
-                        <x-input type="number" name="destination_id" placeholder="local" class="w-full" autocomplete="off"></x-input>
-                        @error('destination_id')
-                        <div class="text-red-600 text-sm">{{$message}}</div>
-                        @enderror
+                        <label for="destination">Destination</label>
+                        <select name="destination_id">
+                        @foreach($destination as $desination)
+                        <option value="{{$desination->id}}" {{(old('destination_id') == $desination->id) ? "selected" : ""}}>
+                            {{$desination->location}}
+                        </option>
+                        @endforeach
+                        </select>
 
                         <button class="my-6"> Save Train</button>
                     </form>
