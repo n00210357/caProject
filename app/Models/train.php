@@ -19,4 +19,9 @@ class train extends Model
         //returns the uuid at the top of the page as appose to the trains id
         return 'uuid';
     }
+
+    public function destination()
+    {
+        return $this->belongsTo(destination::class);
+    }
 }

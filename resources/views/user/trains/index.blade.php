@@ -11,7 +11,6 @@
                 {{session('success')}}
             </x-alert-success>
 
-            <a href="{{ route('user.trains.create') }}" class="btn-link btn-lg mb-2">+ New Train</a>
             @forelse ($trains as $train)
                 <div class="p-6 bg-white border-b border-gray-200 shadow-sj sm:rounded-lg flex">
                     <div>

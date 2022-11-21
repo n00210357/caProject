@@ -23,6 +23,7 @@ class TrainController extends Controller
         $user = Auth::user();
         $user->authorizeRoles('admin');
 
+        $trains = train::all();
         //authenticates the trains to their latest update in pages of 5
         //$trains = train::where('user_id', Auth::id())->latest('updated_at')->paginate(5);
 
@@ -68,7 +69,7 @@ class TrainController extends Controller
             'cargo' => 'required',
             //'image' => 'required',
             'cost' => 'required|between:0,9999.99',
-            'destination' => 'required|integer',
+            'destination_id' => 'required|integer',
         ]);
 
         //$image = $request->file('image');
@@ -86,7 +87,7 @@ class TrainController extends Controller
             'cargo' => $request->cargo,
             'image' => $request->image,
             'cost' => $request->cost,
-            'destination' => $request->destination
+            'destination_id' => $request->destination_id
         ]);
 
         //brings the user to the index page
@@ -106,6 +107,7 @@ class TrainController extends Controller
         $user = Auth::user();
         $user->authorizeRoles('admin');
 
+        $trains = train::with('destination')->get();
         //checks that the trains are the property of the user otheir wise it calls a 403 error
         if ($train->user_id != Auth::id())
         {
@@ -165,7 +167,7 @@ class TrainController extends Controller
             'cargo' => 'required',
             'image' => 'required',
             'cost' => 'required|between:0,9999.99',
-            'destination' => 'required|integer',
+            'destination_id' => 'required|integer',
         ]);
 
         //updates the selected trains value to their new values
@@ -174,7 +176,7 @@ class TrainController extends Controller
             'cargo' => $request->cargo,
             'image' => $request->image,
             'cost' => $request->cost,
-            'destination' => $request->destination
+            'destination_id' => $request->destination_id
         ]);
 
         //returns the user to show page and plays the success message Train updated

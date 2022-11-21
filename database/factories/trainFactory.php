@@ -32,12 +32,12 @@ class trainFactory extends Factory
     {
         return [
             'uuid' => Str::uuid(),
-            'user_id' => 1,
+            'user_id' => $this->faker->randomElement([1, 2]),
             'name' => $this->faker->name(),
             'cargo' => $this->faker->text(),
             'image' => $this->faker->randomElement(['T1.jpg', 'T2.jpg', 'T3.jpg']),
             'cost' => $this->faker->randomFloat(1),
-            'destination' => $this->faker->randomDigitNot(2),
+            'destination_id' => $this->faker->randomElement([1, 2, 3]),
         ];
     }
 

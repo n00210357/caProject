@@ -31,29 +31,50 @@
                 <table>
                     <tbody>
 
-                <div class="p-6 bg-white border-b border-gray-200 shadow-sj sm:rounded-lg">
-                    <h2>
-                    {{$train->name}}
-                    </h2>
+                        <div class="p-6 bg-white border-b border-gray-200 shadow-sj sm:rounded-lg">
+                            <h2>
+                             The Train is {{$train->name}}
+                            </h2>
 
-                    <p class="whitespace-pre-wrap">
-                    <img src="{{url('/images/'. $train->image)}}" alt="Image" width="200px"/>
-                    </p>
+                            <div class="flex">
+                            <p>
+                            <img src="{{url('/images/'. $train->image)}}" alt="Image" width="200px"/>
+                            </p>
 
-                    <p class="whitespace-pre-wrap">
-                       {{$train->cargo}}
-                    </p>
+                            <p>
+                               The Cargo consists of {{$train->cargo}}
+                            </p>
 
-                     <p class="whitespace-pre-wrap">
-                        {{$train->cost}}
-                     </p>
+                             <p>
+                                Cost of €{{$train->cost}}
+                             </p>
+                            </div>
 
-                     <p class="whitespace-pre-wrap">
-                        {{$train->destination}}
-                     </p>
-                    </tbody>
-                     <table>
-                </div>
+                        <div class="p-6"></div>
+
+                             <h2>
+                                Destination
+                             </h2>
+
+                             <div class="flex">
+                             <div>
+                                <img src="{{url('/images/'. $train->destination->picture)}}" alt="Image" width="200px"/>
+                             </div>
+
+                             <div>
+                             <p>
+                                {{$train->destination->location}}
+                             </p>
+
+                             <p class="">
+                                Station Master {{$train->destination->station_master}}
+                             </p>
+                             </div>
+                             </div>
+                            </tbody>
+                             <table>
+                        </div>
             </div>
-        </div>
-</x-app-layout>
+                    </div>
+                </div>
+        </x-app-layout>

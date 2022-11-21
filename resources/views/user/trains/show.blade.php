@@ -16,27 +16,48 @@
 
                 <div class="p-6 bg-white border-b border-gray-200 shadow-sj sm:rounded-lg">
                     <h2>
-                    {{$train->name}}
+                     The Train is {{$train->name}}
                     </h2>
 
-                    <p class="whitespace-pre-wrap">
+                    <div class="flex">
+                    <p>
                     <img src="{{url('/images/'. $train->image)}}" alt="Image" width="200px"/>
                     </p>
 
-                    <p class="whitespace-pre-wrap">
-                       {{$train->cargo}}
+                    <p>
+                       The Cargo consists of {{$train->cargo}}
                     </p>
 
-                     <p class="whitespace-pre-wrap">
-                        {{$train->cost}}
+                     <p>
+                        Cost of €{{$train->cost}}
+                     </p>
+                    </div>
+
+                <div class="p-6"></div>
+
+                     <h2>
+                        Destination
+                     </h2>
+
+                     <div class="flex">
+                     <div>
+                        <img src="{{url('/images/'. $train->destination->picture)}}" alt="Image" width="200px"/>
+                     </div>
+
+                     <div>
+                     <p>
+                        {{$train->destination->location}}
                      </p>
 
-                     <p class="whitespace-pre-wrap">
-                        {{$train->destination}}
+                     <p class="">
+                        Station Master {{$train->destination->station_master}}
                      </p>
+                     </div>
+                     </div>
                     </tbody>
                      <table>
                 </div>
+    </div>
             </div>
         </div>
 </x-app-layout>

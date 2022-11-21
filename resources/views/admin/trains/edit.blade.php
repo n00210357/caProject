@@ -22,7 +22,7 @@
 
                         <x-input type="number" name="cost" placeholder="price" class="w-full" autocomplete="off" :value="@old('cost', $train->cost)"></x-input>
 
-                        <x-input type="number" name="destination" placeholder="local" class="w-full" autocomplete="off" :value="@old('destination', $train->destination)"></x-input>
+                        <x-input type="number" name="destination_id" placeholder="local" class="w-full" autocomplete="off" :value="@old('destination_id', $train->destination_id)"></x-input>
 
                         <button class="my-6"> Save Train</button>
                     </form>

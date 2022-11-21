@@ -32,4 +32,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::resource('/admin/trains', AdminTrainController::class)->middleware(['auth'])->names('admin.trains');
 
-Route::resource('/user/trains', UserTrainController::class)->middleware(['auth'])->names('user.trains')->only(['index', 'show', 'create', 'show']);
+Route::resource('/user/trains', UserTrainController::class)->middleware(['auth'])->names('user.trains')->only(['index', 'show']);

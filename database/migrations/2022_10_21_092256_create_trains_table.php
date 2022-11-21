@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('cargo');
             $table->string('image');
             $table->decimal('cost');
-            $table->integer('destination');
+            $table->foreignId('destination_id')->constrained();
             $table->timestamps();
         });
     }
