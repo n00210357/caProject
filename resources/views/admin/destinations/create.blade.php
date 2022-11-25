@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Trains') }}
+            {{ __('Destination') }}
         </h2>
     </x-slot>
 
@@ -14,39 +14,35 @@
                     <p> {{$error}}</p>
                     @endforeach
 
-                    <form action="{{ route('admin.trains.store')}}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('admin.destinations.store')}}" method="post" enctype="multipart/form-data">
                         @csrf
 
-                        <x-input type="text" name="name" placeholder="Title" class="w-full" autocomplete="off"></x-input>
-                        @error('name')
+                        <x-input type="text" name="location" placeholder="Title" class="w-full" autocomplete="off"></x-input>
+                        @error('location')
                         <div class="text-red-600 text-sm">{{$message}}</div>
                         @enderror
 
-                        <x-textarea name="cargo" rows="10" placeholder="Start typing" class="w-full mt-6"></x-textarea>
-                        @error('cargo')
+                        <x-input name="station_master" rows="10" placeholder="Start typing" class="w-full mt-6"></x-input>
+                        @error('station_master')
                         <div class="text-red-600 text-sm">{{$message}}</div>
                         @enderror
 
-                        <x-text-input name="image" rows="10" placeholder="image" class="w-full mt-6" field="train_image"></x-text-input>
-                        @error('image')
+                        <x-text-input name="picture" rows="10" placeholder="picture" class="w-full mt-6" field="destination_image"></x-text-input>
+                        @error('picture')
                         <div class="text-red-600 text-sm">{{$message}}</div>
                         @enderror
 
-                        <x-input type="number" name="cost" placeholder="price" class="w-full" autocomplete="off"></x-input>
-                        @error('cost')
+                        <x-input type="number" name="has_dock" placeholder="0 = false 1 = true" class="w-full" autocomplete="off"></x-input>
+                        @error('has_dock')
                         <div class="text-red-600 text-sm">{{$message}}</div>
                         @enderror
 
-                        <label for="destination">Destination</label>
-                        <select name="destination_id">
-                        @foreach($destination as $desination)
-                        <option value="{{$desination->id}}" {{(old('destination_id') == $desination->id) ? "selected" : ""}}>
-                            {{$desination->location}}
-                        </option>
-                        @endforeach
-                        </select>
+                        <x-input type="number" name="has_airport" placeholder="0 = false 1 = true" class="w-full" autocomplete="off"></x-input>
+                        @error('has_airport')
+                        <div class="text-red-600 text-sm">{{$message}}</div>
+                        @enderror
 
-                        <button class="my-6"> Save Train</button>
+                        <button class="my-6"> Save Destination</button>
                     </form>
                 </div>
             </div>

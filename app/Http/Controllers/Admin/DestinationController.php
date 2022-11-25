@@ -68,7 +68,7 @@ class DestinationController extends Controller
          $request->validate([
              'location' => 'required',
              'station_master' => 'required|max:120',
-             //'picture' => 'required',
+             'picture' => 'required',
              'has_dock' => 'required|integer',
              'has_airport' => 'required|integer',
          ]);
@@ -76,7 +76,7 @@ class DestinationController extends Controller
          //$picture = $request->file('picture');
          //$extension = $picture->getClientOriginalExtension();
 
-        // $filename = date('Y-m-d-His') . '_' . $request->input('title') . '.' . $extension;
+        // $filename = date('Y-m-d-His') . '_' . $request->input('location') . '.' . $extension;
 
          //$path = $picture->storeAs('public/images', $filename);
 
@@ -113,79 +113,74 @@ class DestinationController extends Controller
         return view('admin.destinations.show')->with('destination', $destination);
     }
 
-     /**
-      * Show the form for editing the specified resource.
-      *
-      * @param  int  $id
-      * @return \Illuminate\Http\Response
-      */
+       /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
 
-     //sends the user the the edit page with their selected destination
-     public function edit(Destination $destination)
+    //sends the user the the edit page with their selected destination
+    public function edit(Destination $destination)
     {
-        $user = Auth::user();
-        $user->authorizeRoles('admin');
+        // This user id check below was implemented as part of LiteNote
+        // I don't have a user id linked to destinations,so I don't need it here - in CA 2 we will allow only admin users to edit destinations.
+        // if($destination->user_id != Auth::id()) {
+        //     return abort(403);
+        // }
 
-        //call error 403 if the destination id is not connected to the user preventing another user from opining the edit page on someone elses destination
-        if ($destination->user_id != Auth::id())
-        {
-            return abort(403);
-        }
+      //  dd($destination);
 
-        //opens up the edit page for the user with their selected destination
-        $destination = destination::all();
-        return view('admin.destinations.edit')->with('destination', $destination)->with('success', 'Destination updated')->with('destination',$destination);
+        // Load the edit view which will display the edit form
+        // Pass in the current dest$destination so that it appears in the form.
+        return view('destinations.edit')->with('$destination', $destination);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Http\Requests\Request  $request
+     * @param  \App\Models\Destination  $destination
      * @return \Illuminate\Http\Response
      */
-
-    //pulls the update page with the selected destinations data already filled in and prepared to be edited
     public function update(Request $request, Destination $destination)
     {
-        $user = Auth::user();
-        $user->authorizeRoles('admin');
-
-        //call error 403 if the destination id is not connected to the user preventing another user from editing someone elses destination
-        if ($destination->user_id != Auth::id())
-        {
-            return abort(403);
-        }
-
-        //inserts the current values of the selected page onto the page
-        $request->validate([
+      //  dd($request);
+        //   //This function is quite like the store() function.
+          $request->validate([
             'location' => 'required',
-            'station_master' => 'required|max:120',
+            'station_master' => 'required|max:500',
             'picture' => 'required',
             'has_dock' => 'required|integer',
-            'has_airport' => 'required|integer',
+            'has_airport' =>'required|integer',
+           //'picture' => 'file|image'
         ]);
 
-        //updates the selected destinations value to their new values
+       // $picture = $request->file('picture');
+       // $extension = $picture->getClientOriginalExtension();
+        // // the filename needs to be unique, I use location and add the date to guarantee a unique filename, ISBN would be better here.
+       // $filename = date('Y-m-d-His') . '_' . $request->input('location') . '.'. $extension;
+
+        // // store the file $picture in /public/images, and name it $filename
+        //$path = $picture->storeAs('public/images', $filename);
+
         $destination->update([
             'location' => $request->location,
             'station_master' => $request->station_master,
-            'picture' => $request->picture,
             'has_dock' => $request->has_dock,
+            'picture' => $request->picture,
             'has_airport' => $request->has_airport
         ]);
 
-        //returns the user to show page and plays the success message Destination updated
-        $destination = destination::all();
-        return to_route('admin.destinations.show', $destination)->with('success', 'Destination updated')->with('destination',$destination);
+        return to_route('destinations.show', $destination)->with('success','Destination updated successfully');
     }
 
-     /**
-      * Remove the specified resource from storage.
-      *
-      * @param  int  $id
-      * @return \Illuminate\Http\Response
-      */
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
 
       //when called with a destination id it allows it to be deleted and sends the user back to the users index page
      public function destroy(Destination $destination)
