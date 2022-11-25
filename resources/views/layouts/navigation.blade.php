@@ -16,6 +16,12 @@
                         {{ __('Trains') }}
                     </x-nav-link>
                 </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('home.destination.index')" :active="request()->routeIs('home.destination.index')">
+                        {{ __('Destinations') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->

@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('destinations', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid');
+            $table->foreignId('user_id')->constrained();
             $table->string('location');
             $table->string('station_master');
             $table->string('picture');

@@ -9,6 +9,15 @@ class destination extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
+    //gets key / uuid
+    public function getRouteKeyName()
+    {
+        //returns the uuid at the top of the page as appose to the trains id
+        return 'uuid';
+    }
+
     public function trains()
     {
         return $this->hasMany((train::class));

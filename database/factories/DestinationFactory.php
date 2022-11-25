@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\destination>
@@ -17,6 +18,8 @@ class DestinationFactory extends Factory
     public function definition()
     {
         return [
+            'uuid' => Str::uuid(),
+            'user_id' => $this->faker->randomElement([1, 2]),
             'location' => $this->faker->text,
             'station_master' => $this->faker->name,
             'picture' => $this->faker->randomElement(['T1.jpg', 'T2.jpg', 'T3.jpg']),
