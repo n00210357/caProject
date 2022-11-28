@@ -38,7 +38,7 @@
 
                             <div class="flex">
                             <p>
-                            <img src="{{url('/images/'. $train->image)}}" alt="Image" width="200px"/>
+                            <img src="{{asset('storage/images/train/' . $train->image)}}" width="200"/>
                             </p>
 
                             <p>
@@ -58,7 +58,7 @@
 
                              <div class="flex">
                              <div>
-                                <img src="{{url('/images/'. $train->destination->picture)}}" alt="Image" width="200px"/>
+                                <img src="{{asset('storage/images/destination/' . $train->destination->picture)}}" width="200"/>
                              </div>
 
                              <div>

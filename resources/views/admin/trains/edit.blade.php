@@ -18,7 +18,7 @@
 
                         <x-textarea name="cargo" rows="10" placeholder="Start typing" class="w-full mt-6" value="{{@old('cargo', $train->cargo)}}"></x-textarea>
 
-                        <x-input name="image" rows="10" placeholder="Start typing" class="w-full mt-6" :value="@old('image', $train->image)"></x-input>
+                        <x-file-input type="file" name="image" placeholder="Train" class="w-full mt-6" field="image" value="{{@old('image', $train->image)}}"></x-file-input>
 
                         <x-input type="number" name="cost" placeholder="price" class="w-full" autocomplete="off" :value="@old('cost', $train->cost)"></x-input>
 

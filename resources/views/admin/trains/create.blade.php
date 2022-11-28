@@ -27,10 +27,7 @@
                         <div class="text-red-600 text-sm">{{$message}}</div>
                         @enderror
 
-                        <x-text-input name="image" rows="10" placeholder="image" class="w-full mt-6" field="train_image"></x-text-input>
-                        @error('image')
-                        <div class="text-red-600 text-sm">{{$message}}</div>
-                        @enderror
+                        <x-file-input type="file" name="image" placeholder="Train" class="w-full mt-6" field="image"></x-file-input>
 
                         <x-input type="number" name="cost" placeholder="price" class="w-full" autocomplete="off"></x-input>
                         @error('cost')

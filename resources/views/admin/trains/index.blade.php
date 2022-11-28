@@ -16,7 +16,7 @@
                 <div class="p-6 bg-white border-b border-gray-200 shadow-sj sm:rounded-lg flex">
                     <div>
                     <p class="whitespace-pre-wrap">
-                        <img src="{{url('/images/'. $train->image)}}" alt="Image" width="150px"/>
+                        <img src="{{asset('storage/images/train/' . $train->image)}}" width="200"/>
                     </p>
                     </div>
 

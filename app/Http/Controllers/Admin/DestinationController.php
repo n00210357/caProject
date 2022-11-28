@@ -59,42 +59,42 @@ class DestinationController extends Controller
       */
 
  //when called it stores the given data for destinations into the database destination table
-     public function store(Request $request)
-     {
-         $user = Auth::user();
-         $user->authorizeRoles('admin');
+ public function store(Request $request)
+ {
+     $user = Auth::user();
+     $user->authorizeRoles('admin');
 
-         //checks if given data is valid before sending to database
-         $request->validate([
-             'location' => 'required',
-             'station_master' => 'required|max:120',
-             'picture' => 'required',
-             'has_dock' => 'required|integer',
-             'has_airport' => 'required|integer',
-         ]);
+     //checks if given data is valid before sending to database
+     $request->validate([
+         'location' => 'required',
+         'station_master' => 'required|max:120',
+         //'picture' => 'required',
+         'picture' => 'file|image',
+         'has_dock' =>'required|integer',
+         'has_airport' =>'required|integer'
+     ]);
 
-         //$picture = $request->file('picture');
-         //$extension = $picture->getClientOriginalExtension();
+     $picture = $request->file('picture');
+     $extension = $picture->getClientOriginalExtension();
+     // the filnam needs to be unique, I use title and add the date to guarantee a unique filnam, ISBN would be better here.
+     $filnam = date('Y-m-d-His') . '_' . $request->input('title') . '.'. $extension;
+     $path = $picture->storeAs('public/images/train', $filnam);
 
-        // $filename = date('Y-m-d-His') . '_' . $request->input('location') . '.' . $extension;
+     //uses the new data to create a new train in the train table
+     Destination::create([
+         'uuid' => Str::uuid(),
+         'user_id' => Auth::id(),
+         'location' => $request->location,
+         'station_master' => $request->station_master,
+         'picture' => $filnam,
+         'has_dock' => $request->has_dock,
+         'has_airport' => $request->has_airport
+     ]);
 
-         //$path = $picture->storeAs('public/images', $filename);
-
-         //uses the new data to create a new destination in the destination table
-         Destination::create([
-             'uuid' => Str::uuid(),
-             'user_id' => Auth::id(),
-             'location' => $request->location,
-             'station_master' => $request->station_master,
-             'picture' => $request->picture,
-             'has_dock' => $request->has_dock,
-             'has_airport' => $request->has_airport
-         ]);
-
-         //brings the user to the index page
-         $destination = destination::all();
-         return to_route('admin.destinations.index')->with('destination',$destination);
-     }
+     //brings the user to the index page
+     $destination = destination::all();
+     return to_route('admin.trains.index')->with('destination',$destination);
+ }
 
      /**
       * Display the specified resource.
@@ -123,24 +123,15 @@ class DestinationController extends Controller
     //sends the user the the edit page with their selected destination
     public function edit(Destination $destination)
     {
-        // This user id check below was implemented as part of LiteNote
-        // I don't have a user id linked to destinations,so I don't need it here - in CA 2 we will allow only admin users to edit destinations.
-        // if($destination->user_id != Auth::id()) {
-        //     return abort(403);
-        // }
 
-      //  dd($destination);
-
-        // Load the edit view which will display the edit form
-        // Pass in the current dest$destination so that it appears in the form.
-        return view('destinations.edit')->with('$destination', $destination);
+        return view('admin.destinations.edit')->with('destination', $destination);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\Request  $request
-     * @param  \App\Models\Destination  $destination
+     * @param  \App\Models\destination  $destination
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Destination $destination)
@@ -149,30 +140,29 @@ class DestinationController extends Controller
         //   //This function is quite like the store() function.
           $request->validate([
             'location' => 'required',
-            'station_master' => 'required|max:500',
-            'picture' => 'required',
-            'has_dock' => 'required|integer',
+            'station_master' => 'required',
+            'picture' => 'required|max:500',
+            'has_dock' =>'required|integer',
             'has_airport' =>'required|integer',
-           //'picture' => 'file|image'
+            //'picture' => 'file|picture|dimensions:width=300,height=400'
+           'picture' => 'file|picture'
         ]);
 
-       // $picture = $request->file('picture');
-       // $extension = $picture->getClientOriginalExtension();
-        // // the filename needs to be unique, I use location and add the date to guarantee a unique filename, ISBN would be better here.
-       // $filename = date('Y-m-d-His') . '_' . $request->input('location') . '.'. $extension;
-
-        // // store the file $picture in /public/images, and name it $filename
-        //$path = $picture->storeAs('public/images', $filename);
+        $picture = $request->file('picture');
+        $extension = $picture->getClientOriginalExtension();
+        // the filnam needs to be unique, I use title and add the date to guarantee a unique filnam, ISBN would be better here.
+        $filnam = date('Y-m-d-His') . '_' . $request->input('title') . '.'. $extension;
+        $path = $picture->storeAs('public/images/destination', $filnam);
 
         $destination->update([
             'location' => $request->location,
             'station_master' => $request->station_master,
+            'picture' => $filnam,
             'has_dock' => $request->has_dock,
-            'picture' => $request->picture,
-            'has_airport' => $request->has_airport
+            'has_airport' => $request->has_airport,
         ]);
 
-        return to_route('destinations.show', $destination)->with('success','Destination updated successfully');
+        return to_route('admin.destinations.show', $destination)->with('success','Destination updated successfully');
     }
 
     /**

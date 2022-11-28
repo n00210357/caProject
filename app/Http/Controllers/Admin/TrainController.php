@@ -70,16 +70,16 @@ class TrainController extends Controller
             'name' => 'required|max:120',
             'cargo' => 'required',
             //'image' => 'required',
+            'image' => 'file|image',
             'cost' => 'required|between:0,9999.99',
-            'destination_id' => 'required|integer',
+            'destination_id' => 'required|integer'
         ]);
 
-        //$image = $request->file('image');
-        //$extension = $image->getClientOriginalExtension();
-
-       // $filename = date('Y-m-d-His') . '_' . $request->input('title') . '.' . $extension;
-
-        //$path = $image->storeAs('public/images', $filename);
+        $image = $request->file('image');
+        $extension = $image->getClientOriginalExtension();
+        // the filename needs to be unique, I use title and add the date to guarantee a unique filename, ISBN would be better here.
+        $filename = date('Y-m-d-His') . '_' . $request->input('title') . '.'. $extension;
+        $path = $image->storeAs('public/images/train', $filename);
 
         //uses the new data to create a new train in the train table
         Train::create([
@@ -87,7 +87,7 @@ class TrainController extends Controller
             'user_id' => Auth::id(),
             'name' => $request->name,
             'cargo' => $request->cargo,
-            'image' => $request->image,
+            'image' => $filename,
             'cost' => $request->cost,
             'destination_id' => $request->destination_id
         ]);
@@ -169,16 +169,22 @@ class TrainController extends Controller
         $request->validate([
             'name' => 'required|max:120',
             'cargo' => 'required',
-            'image' => 'required',
+            'image' => 'file|image',
             'cost' => 'required|between:0,9999.99',
             'destination_id' => 'required|integer',
         ]);
+
+        $image = $request->file('image');
+        $extension = $image->getClientOriginalExtension();
+        // the filename needs to be unique, I use title and add the date to guarantee a unique filename, ISBN would be better here.
+        $filename = date('Y-m-d-His') . '_' . $request->input('title') . '.'. $extension;
+        $path = $image->storeAs('public/images/train', $filename);
 
         //updates the selected trains value to their new values
         $train->update([
             'name' => $request->name,
             'cargo' => $request->cargo,
-            'image' => $request->image,
+            'image' => $filename,
             'cost' => $request->cost,
             'destination_id' => $request->destination_id
         ]);

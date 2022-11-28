@@ -14,11 +14,12 @@
                         @method('put')
                         @csrf
 
+
                         <x-input name="location" rows="10" placeholder="Title" class="w-full" autocomplete="off" :value="@old('title', $destination->location)"></x-input>
 
                         <x-input type="text" name="station_master" placeholder="Start typing" class="w-full mt-6" value="{{@old('station_master', $destination->station_master)}}"></x-input>
 
-                        <x-input name="picture" rows="10" placeholder="Start typing" class="w-full mt-6" :value="@old('picture', $destination->picture)"></x-input>
+                        <x-file-input type="file" name="picture" placeholder="Train" class="w-full mt-6" field="image" value="{{@old('picture', $destination->picture)}}"></x-file-input>
 
                         <x-input type="number" name="has_dock" placeholder="price" class="w-full" autocomplete="off" :value="@old('has_dock', $destination->has_dock)"></x-input>
 
