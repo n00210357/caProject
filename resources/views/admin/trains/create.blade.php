@@ -43,6 +43,14 @@
                         @endforeach
                         </select>
 
+                        <div class="form-group">
+                            <label for="drivers"> <strong> Drivers</strong> <br> </label>
+                            @foreach ($drivers as $drive)
+                            <input type="checkbox", value="{{$drive->id}}" name="drivers[]">
+                            {{$drive->first_name}}
+
+                            @endforeach
+
                         <button class="my-6"> Save Train</button>
                     </form>
                 </div>

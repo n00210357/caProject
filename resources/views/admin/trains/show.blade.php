@@ -71,6 +71,18 @@
                              </p>
                              </div>
                              </div>
+
+                             <div class="p-6"></div>
+
+                        <div>
+                            @foreach ($train->driver as $driver)
+                            <tr>
+                                <td class="font-bold">Driver</td>
+                                <td> {{$driver->first_name}} </td>
+                                <td> {{$driver->last_name}} </td>
+                            </tr>
+                            @endforeach
+                        </div>
                             </tbody>
                              <table>
                         </div>

@@ -21,7 +21,7 @@
 
                     <div class="flex">
                     <p>
-                    <img src="{{url('/images/'. $train->image)}}" alt="Image" width="200px"/>
+                    <img src="{{url('storage/images/train/'. $train->image)}}" alt="Image" width="200px"/>
                     </p>
 
                     <p>
@@ -41,7 +41,7 @@
 
                      <div class="flex">
                      <div>
-                        <img src="{{url('/images/'. $train->destination->picture)}}" alt="Image" width="200px"/>
+                        <img src="{{url('storage/images/destination/'. $train->destination->picture)}}" alt="Image" width="200px"/>
                      </div>
 
                      <div>
@@ -54,6 +54,18 @@
                      </p>
                      </div>
                      </div>
+
+                     <div class="p-6"></div>
+
+                        <div>
+                            @foreach ($train->driver as $driver)
+                            <tr>
+                                <td class="font-bold">Driver</td>
+                                <td> {{$driver->first_name}} </td>
+                                <td> {{$driver->last_name}} </td>
+                            </tr>
+                            @endforeach
+                        </div>
                     </tbody>
                      <table>
                 </div>

@@ -22,7 +22,7 @@ class DestinationFactory extends Factory
             'user_id' => $this->faker->randomElement([1, 2]),
             'location' => $this->faker->text,
             'station_master' => $this->faker->name,
-            'picture' => $this->faker->randomElement(['T1.jpg', 'T2.jpg', 'T3.jpg']),
+            'picture' => $this->faker->randomElement(['D1.jpg', 'D2.jpg', 'D3.jpg']),
             'has_dock' => $this->faker->randomElement([0, 1]),
             'has_airport' => $this->faker->randomElement([0, 1]),
         ];

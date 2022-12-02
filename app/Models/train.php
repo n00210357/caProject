@@ -24,4 +24,9 @@ class train extends Model
     {
         return $this->belongsTo(destination::class);
     }
+
+    public function driver()
+    {
+        return $this->belongsToMany(driver::class)->withTimestamps();
+    }
 }

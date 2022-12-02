@@ -40,7 +40,7 @@ class TrainController extends Controller
         $user = Auth::user();
         $user->authorizeRoles('user');
 
-        $trains = train::with('destination')->get();
+        $trains = train::with('destination')->with('driver')->get();
         //checks that the trains are the property of the user otheir wise it calls a 403 error
         if ($train->user_id != Auth::id())
         {

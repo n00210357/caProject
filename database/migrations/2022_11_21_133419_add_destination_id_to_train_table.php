@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::table('trains', function (Blueprint $table) {
             $table->unsignedBigInteger('destination_id');
-            $table->foreign('destination_id')->references('id')->on('destination')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreign('destination_id')->references('id')->on('destinations')->onUpdate('cascade')->onDelete('restrict');
         });
     }
 
@@ -26,7 +26,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('trains', function (Blueprint $table) {
+        Schema::table('trains', function (Blueprint $table)
+        {
             $table->dropForeign(['destination_id']);
             $table->dropColumn('destination_id');
         });

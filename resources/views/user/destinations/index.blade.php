@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Trains') }}
+            {{ __('Destinations') }}
         </h2>
     </x-slot>
 
@@ -11,30 +11,30 @@
                 {{session('success')}}
             </x-alert-success>
 
-            @forelse ($trains as $train)
+            @forelse ($destinations as $destination)
                 <div class="p-6 bg-white border-b border-gray-200 shadow-sj sm:rounded-lg flex">
                     <div>
                     <p class="whitespace-pre-wrap">
-                        <img src="{{url('storage/images/train/'. $train->image)}}" alt="Image" width="150px"/>
+                        <img src="{{asset('storage/images/destination/' . $destination->picture)}}" width="200"/>
                     </p>
                     </div>
 
                     <div>
                     <h2>
-                        <a href="{{ route('user.trains.show', $train) }}"> {{$train->name}}</a>
+                        <a href="{{ route('admin.destinations.show', $destination) }}"> {{$destination->location}}</a>
                     </h2>
 
                     <p class="mt-2">
-                        {{Str::limit($train->cargo), 200}}
+                        {{Str::limit($destination->station_master), 200}}
                      </p>
                     </div>
 
-                    <span class="block mt-4 text-sm opacity-70"> {{$train->updated_at->diffForHumans()}}</span>
+                    <span class="block mt-4 text-sm opacity-70"> {{$destination->updated_at->diffForHumans()}}</span>
                 </div>
                 @empty
-                <p>You have no trains</p>
+                <p>You have no destinations</p>
                 @endforelse
-                {{$trains->links()}}
+                {{$destinations->links()}}
             </div>
         </div>
 </x-app-layout>

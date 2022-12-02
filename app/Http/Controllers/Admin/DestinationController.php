@@ -48,6 +48,7 @@ class DestinationController extends Controller
 
          //sends the user to the create page
          $destination = destination::all();
+
          return view('admin.destinations.create')->with('destination', $destination);
      }
 
@@ -78,7 +79,7 @@ class DestinationController extends Controller
      $extension = $picture->getClientOriginalExtension();
      // the filnam needs to be unique, I use title and add the date to guarantee a unique filnam, ISBN would be better here.
      $filnam = date('Y-m-d-His') . '_' . $request->input('title') . '.'. $extension;
-     $path = $picture->storeAs('public/images/train', $filnam);
+     $path = $picture->storeAs('public/images/destination', $filnam);
 
      //uses the new data to create a new train in the train table
      Destination::create([
@@ -93,7 +94,7 @@ class DestinationController extends Controller
 
      //brings the user to the index page
      $destination = destination::all();
-     return to_route('admin.trains.index')->with('destination',$destination);
+     return to_route('admin.destinations.index')->with('destination',$destination);
  }
 
      /**
@@ -141,18 +142,18 @@ class DestinationController extends Controller
           $request->validate([
             'location' => 'required',
             'station_master' => 'required',
-            'picture' => 'required|max:500',
+            //'picture' => 'required|max:500',
             'has_dock' =>'required|integer',
             'has_airport' =>'required|integer',
             //'picture' => 'file|picture|dimensions:width=300,height=400'
-           'picture' => 'file|picture'
+           'picture' => 'file|image'
         ]);
 
         $picture = $request->file('picture');
-        $extension = $picture->getClientOriginalExtension();
-        // the filnam needs to be unique, I use title and add the date to guarantee a unique filnam, ISBN would be better here.
-        $filnam = date('Y-m-d-His') . '_' . $request->input('title') . '.'. $extension;
-        $path = $picture->storeAs('public/images/destination', $filnam);
+     $extension = $picture->getClientOriginalExtension();
+     // the filnam needs to be unique, I use title and add the date to guarantee a unique filnam, ISBN would be better here.
+     $filnam = date('Y-m-d-His') . '_' . $request->input('title') . '.'. $extension;
+     $path = $picture->storeAs('public/images/destination', $filnam);
 
         $destination->update([
             'location' => $request->location,

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\destination;
+use App\Models\driver;
 use App\Models\train;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -49,7 +50,8 @@ class TrainController extends Controller
 
         //sends the user to the create page
         $destination = destination::all();
-        return view('admin.trains.create')->with('destination', $destination);
+        $drivers = destination::all();
+        return view('admin.trains.create')->with('destination', $destination)->with('drivers', $drivers);
     }
 
     /**
@@ -72,7 +74,8 @@ class TrainController extends Controller
             //'image' => 'required',
             'image' => 'file|image',
             'cost' => 'required|between:0,9999.99',
-            'destination_id' => 'required|integer'
+            'destination_id' => 'required|integer',
+            'drivers' =>['required' , 'exists:driver,id']
         ]);
 
         $image = $request->file('image');
@@ -82,7 +85,7 @@ class TrainController extends Controller
         $path = $image->storeAs('public/images/train', $filename);
 
         //uses the new data to create a new train in the train table
-        Train::create([
+        $train = Train::create([
             'uuid' => Str::uuid(),
             'user_id' => Auth::id(),
             'name' => $request->name,
@@ -94,6 +97,7 @@ class TrainController extends Controller
 
         //brings the user to the index page
         $destination = destination::all();
+        $train->drivers()->attach($request->drivers);
         return to_route('admin.trains.index')->with('destination',$destination);
     }
 
@@ -110,7 +114,7 @@ class TrainController extends Controller
         $user = Auth::user();
         $user->authorizeRoles('admin');
 
-        $trains = train::with('destination')->get();
+        $trains = train::with('destination')->with('drivers')->get();
         //checks that the trains are the property of the user otheir wise it calls a 403 error
         if ($train->user_id != Auth::id())
         {

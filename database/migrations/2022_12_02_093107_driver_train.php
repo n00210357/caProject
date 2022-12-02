@@ -13,15 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('user_role', function (Blueprint $table) {
+        Schema::create('driver_train', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('train_id');
+            $table->unsignedBigInteger('driver_id');
 
-            $table->bigInteger('user_id')->unsigned();
-            $table->bigInteger('role_id')->unsigned();
+            $table->foreign('train_id')->references('id')->on('trains')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreign('driver_id')->references('id')->on('drivers')->onUpdate('cascade')->onDelete('restrict');
             $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('restrict');
-            $table->foreign('role_id')->references('id')->on('roles')->onUpdate('cascade')->onDelete('restrict');
         });
     }
 
@@ -32,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_role');
+        Schema::dropIfExists('driver_train');
     }
 };

@@ -27,7 +27,7 @@
                         <div class="text-red-600 text-sm">{{$message}}</div>
                         @enderror
 
-                        <x-file-input type="file" name="image" placeholder="Train" class="w-full mt-6" field="image"></x-file-input>
+                        <x-file-input type="file" name="picture" placeholder="Train" class="w-full mt-6" field="image"></x-file-input>
 
                         <x-input type="number" name="has_dock" placeholder="0 = false 1 = true" class="w-full" autocomplete="off"></x-input>
                         @error('has_dock')
