@@ -50,7 +50,7 @@ class TrainController extends Controller
 
         //sends the user to the create page
         $destination = destination::all();
-        $drivers = destination::all();
+        $drivers = driver::all();
         return view('admin.trains.create')->with('destination', $destination)->with('drivers', $drivers);
     }
 
@@ -114,7 +114,7 @@ class TrainController extends Controller
         $user = Auth::user();
         $user->authorizeRoles('admin');
 
-        $trains = train::with('destination')->with('drivers')->get();
+        $trains = train::with('destination')->with('driver')->get();
         //checks that the trains are the property of the user otheir wise it calls a 403 error
         if ($train->user_id != Auth::id())
         {

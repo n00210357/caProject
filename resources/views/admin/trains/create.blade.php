@@ -51,6 +51,8 @@
 
                             @endforeach
 
+                        </div>
+
                         <button class="my-6"> Save Train</button>
                     </form>
                 </div>
