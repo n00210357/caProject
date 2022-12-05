@@ -24,7 +24,7 @@ class TrainController extends Controller
     {
         $user = Auth::user();
         $user->authorizeRoles('admin');
-
+        $trains = train::with('user')->get();
         $trains = train::all();
         //authenticates the trains to their latest update in pages of 5
         //$trains = train::where('user_id', Auth::id())->latest('updated_at')->paginate(5);

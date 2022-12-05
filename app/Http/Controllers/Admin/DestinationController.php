@@ -110,6 +110,10 @@ class DestinationController extends Controller
         $user = Auth::user();
         $user->authorizeRoles('admin');
 
+        if ($destination->user_id != Auth::id())
+        {
+            return abort(403);
+        }
         //opens up the show page for the user
         return view('admin.destinations.show')->with('destination', $destination);
     }
@@ -124,6 +128,10 @@ class DestinationController extends Controller
     //sends the user the the edit page with their selected destination
     public function edit(Destination $destination)
     {
+        if ($destination->user_id != Auth::id())
+        {
+            return abort(403);
+        }
 
         return view('admin.destinations.edit')->with('destination', $destination);
     }
@@ -137,6 +145,13 @@ class DestinationController extends Controller
      */
     public function update(Request $request, Destination $destination)
     {
+        $user = Auth::user();
+        $user->authorizeRoles('admin');
+        
+        if ($destination->user_id != Auth::id())
+        {
+            return abort(403);
+        }
       //  dd($request);
         //   //This function is quite like the store() function.
           $request->validate([

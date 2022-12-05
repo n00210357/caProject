@@ -35,14 +35,6 @@ class DestinationController extends Controller
      }
 
      /**
-      * Show the form for creating a new resource.
-      *
-      * @return \Illuminate\Http\Response
-      */
-
-      //when called sends the user to the destinations create page
-
-     /**
       * Display the specified resource.
       *
       * @param  int  $id
@@ -55,6 +47,10 @@ class DestinationController extends Controller
         $user = Auth::user();
         $user->authorizeRoles('admin');
 
+        if ($destination->user_id != Auth::id())
+        {
+            return abort(403);
+        }
         //opens up the show page for the user
         return view('admin.destinations.show')->with('destination', $destination);
     }

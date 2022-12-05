@@ -22,4 +22,9 @@ class destination extends Model
     {
         return $this->hasMany((train::class));
     }
+
+    public function user()
+    {
+        return $this->belongsTo(user::class);
+    }
 }

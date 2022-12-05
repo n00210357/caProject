@@ -68,4 +68,19 @@ class User extends Authenticatable
     {
         return null !== $this->roles()->whereIn('name', $roles)->first();
     }
+
+    public function trains()
+    {
+        return $this->hasMany((train::class));
+    }
+
+    public function destinations()
+    {
+        return $this->hasMany((destination::class));
+    }
+
+    public function drivers()
+    {
+        return $this->hasMany((driver::class));
+    }
 }

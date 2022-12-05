@@ -28,6 +28,10 @@
                     <p class="mt-2">
                         {{Str::limit($destination->station_master), 200}}
                      </p>
+
+                     <p class="mt-2">
+                        Owned by {{$destination->user->name}}
+                    </p>
                     </div>
 
                     <span class="block mt-4 text-sm opacity-70"> {{$destination->updated_at->diffForHumans()}}</span>
