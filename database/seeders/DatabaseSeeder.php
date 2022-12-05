@@ -12,6 +12,8 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
+
+     //runs all listed seeders at once
     public function run()
     {
         $this->call(RoleSeeder::class);

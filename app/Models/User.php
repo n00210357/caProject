@@ -69,16 +69,19 @@ class User extends Authenticatable
         return null !== $this->roles()->whereIn('name', $roles)->first();
     }
 
+    //links user to train as a foreign key
     public function trains()
     {
         return $this->hasMany((train::class));
     }
 
+    //links user to destination as a foreign key
     public function destinations()
     {
         return $this->hasMany((destination::class));
     }
 
+    //links user to driver as a foreign key
     public function drivers()
     {
         return $this->hasMany((driver::class));

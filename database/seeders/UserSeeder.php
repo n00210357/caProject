@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
      */
     //runs trainFactory.php when called in terminal
 
-    //when this is run it attempts to use factory to input 10 filler trains into the train table of the database
+    //when this is run it attempts to use factory to input 10 filler users into the user table of the database
     public function run()
     {
         $role_admin = Role::where('name', 'admin')->first();

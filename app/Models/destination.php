@@ -9,6 +9,7 @@ class destination extends Model
 {
     use HasFactory;
 
+    //grants basic protection
     protected $guarded = [];
 
     //gets key / uuid
@@ -18,11 +19,13 @@ class destination extends Model
         return 'uuid';
     }
 
+    //links destination to trains as a foreign key
     public function trains()
     {
         return $this->hasMany((train::class));
     }
 
+    //links destination to user as a foreign key
     public function user()
     {
         return $this->belongsTo(user::class);

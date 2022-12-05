@@ -15,6 +15,8 @@ class UserFactory extends Factory
      *
      * @return array<string, mixed>
      */
+
+     //sets what is to be filled with data when seeder is called
     public function definition()
     {
         return [
