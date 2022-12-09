@@ -29,15 +29,11 @@
 
                         <x-file-input type="file" name="picture" placeholder="Train" class="w-full mt-6" field="image"></x-file-input>
 
-                        <x-input type="number" name="has_dock" placeholder="0 = false 1 = true" class="w-full" autocomplete="off"></x-input>
-                        @error('has_dock')
-                        <div class="text-red-600 text-sm">{{$message}}</div>
-                        @enderror
+                        <input type="hidden" name="has_dock" value="0"/>
+                        <x-input type="checkbox" name="has_dock" placeholder="0 = false 1 = true" class="w-full" autocomplete="off" value=1></x-input>
 
-                        <x-input type="number" name="has_airport" placeholder="0 = false 1 = true" class="w-full" autocomplete="off"></x-input>
-                        @error('has_airport')
-                        <div class="text-red-600 text-sm">{{$message}}</div>
-                        @enderror
+                        <input type="hidden" name="has_airport" value="0"/>
+                        <x-input type="checkbox" name="has_airport" placeholder="0 = false 1 = true" class="w-full" autocomplete="off" value=1></x-input>
 
                         <button class="my-6"> Save Destination</button>
                     </form>

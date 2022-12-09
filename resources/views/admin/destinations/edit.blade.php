@@ -21,9 +21,11 @@
 
                         <x-file-input type="file" name="picture" placeholder="Train" class="w-full mt-6" field="image" value="{{@old('picture', $destination->picture)}}"></x-file-input>
 
-                        <x-input type="number" name="has_dock" placeholder="price" class="w-full" autocomplete="off" :value="@old('has_dock', $destination->has_dock)"></x-input>
+                        <input type="hidden" name="has_dock" value="0"/>
+                        <x-input type="checkbox" name="has_dock" placeholder="0 = false 1 = true" class="w-full" autocomplete="on" value=1></x-input>
 
-                        <x-input type="number" name="has_airport" placeholder="price" class="w-full" autocomplete="off" :value="@old('has_airport', $destination->has_airport)"></x-input>
+                        <input type="hidden" name="has_airport" value="0"/>
+                        <x-input type="checkbox" name="has_airport" placeholder="0 = false 1 = true" class="w-full" autocomplete="on" value=1></x-input>
 
                         <button class="my-6"> Save Destination</button>
                     </form>
