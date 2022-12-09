@@ -11,51 +11,61 @@
                 {{session('success')}}
             </x-alert-success>
 
+            <div class ="flex">
+                <p class="opacity-70">
+                    <strong>Created: </strong> {{$train->created_at->diffForHumans()}}
+                </p>
+
+                <p class="opacity-70 ml-8">
+                    <strong>Updated at: </strong> {{$train->updated_at->diffForHumans()}}
+                </p>
+
+                </div>
                 <table>
                     <tbody>
 
-                <div class="p-6 bg-white border-b border-gray-200 shadow-sj sm:rounded-lg">
-                    <h2>
-                     The Train is {{$train->name}}
-                    </h2>
+                        <div class="p-6 bg-white border-b border-gray-200 shadow-sj sm:rounded-lg">
+                            <h2>
+                             The Train is {{$train->name}}
+                            </h2>
 
-                    <div class="flex">
-                    <p>
-                    <img src="{{url('storage/images/train/'. $train->image)}}" alt="Image" width="200px"/>
-                    </p>
+                            <div class="flex">
+                            <p>
+                            <img src="{{asset('storage/images/train/' . $train->image)}}" width="200"/>
+                            </p>
 
-                    <p>
-                       The Cargo consists of {{$train->cargo}}
-                    </p>
+                            <p>
+                               The Cargo consists of {{$train->cargo}}
+                            </p>
 
-                     <p>
-                        Cost of €{{$train->cost}}
-                     </p>
-                    </div>
+                             <p>
+                                Cost of €{{$train->cost}}
+                             </p>
+                            </div>
 
-                <div class="p-6"></div>
+                        <div class="p-6"></div>
 
-                     <h2>
-                        Destination
-                     </h2>
+                             <h2>
+                                Destination
+                             </h2>
 
-                     <div class="flex">
-                     <div>
-                        <img src="{{url('storage/images/destination/'. $train->destination->picture)}}" alt="Image" width="200px"/>
-                     </div>
+                             <div class="flex">
+                             <div>
+                                <img src="{{asset('storage/images/destination/' . $train->destination->picture)}}" width="200"/>
+                             </div>
 
-                     <div>
-                     <p>
-                        {{$train->destination->location}}
-                     </p>
+                             <div>
+                             <p>
+                                {{$train->destination->location}}
+                             </p>
 
-                     <p class="">
-                        Station Master {{$train->destination->station_master}}
-                     </p>
-                     </div>
-                     </div>
+                             <p class="">
+                                Station Master {{$train->destination->station_master}}
+                             </p>
+                             </div>
+                             </div>
 
-                     <div class="p-6"></div>
+                             <div class="p-6"></div>
 
                         <div>
                             @foreach ($train->driver as $driver)
@@ -66,10 +76,10 @@
                             </tr>
                             @endforeach
                         </div>
-                    </tbody>
-                     <table>
-                </div>
-    </div>
+                            </tbody>
+                             <table>
+                        </div>
             </div>
-        </div>
-</x-app-layout>
+                    </div>
+                </div>
+        </x-app-layout>

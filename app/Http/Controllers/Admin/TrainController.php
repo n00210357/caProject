@@ -75,7 +75,7 @@ class TrainController extends Controller
             'image' => 'file|image',
             'cost' => 'required|between:0,9999.99',
             'destination_id' => 'required|integer',
-            'drivers' =>['required' , 'exists:driver,id']
+            'drivers' =>['required' , 'exists:drivers,id']
         ]);
 
         $image = $request->file('image');
@@ -97,7 +97,7 @@ class TrainController extends Controller
 
         //brings the user to the index page
         $destination = destination::all();
-        $train->drivers()->attach($request->drivers);
+        $train->driver()->attach($request->drivers);
         return to_route('admin.trains.index')->with('destination',$destination);
     }
 

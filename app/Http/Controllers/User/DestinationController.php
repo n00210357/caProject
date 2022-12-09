@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\destination;
@@ -21,7 +21,7 @@ class DestinationController extends Controller
      public function index()
      {
          $user = Auth::user();
-         $user->authorizeRoles('admin');
+         $user->authorizeRoles('user');
 
          $destinations = destination::all();
          //authenticates the destinations to their latest update in pages of 5
@@ -31,7 +31,7 @@ class DestinationController extends Controller
          $destinations = Destination::paginate(10);
 
          //brings the user to the index page along with the linked in destinations
-         return view('admin.destinations.index')->with('destinations', $destinations);
+         return view('user.destinations.index')->with('destinations', $destinations);
      }
 
      /**
@@ -45,13 +45,13 @@ class DestinationController extends Controller
       public function show(Destination $destination)
      {
         $user = Auth::user();
-        $user->authorizeRoles('admin');
+        $user->authorizeRoles('user');
 
         if ($destination->user_id != Auth::id())
         {
             return abort(403);
         }
         //opens up the show page for the user
-        return view('admin.destinations.show')->with('destination', $destination);
+        return view('user.destinations.show')->with('destination', $destination);
     }
 }

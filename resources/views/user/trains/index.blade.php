@@ -15,7 +15,7 @@
                 <div class="p-6 bg-white border-b border-gray-200 shadow-sj sm:rounded-lg flex">
                     <div>
                     <p class="whitespace-pre-wrap">
-                        <img src="{{url('storage/images/train/'. $train->image)}}" alt="Image" width="150px"/>
+                        <img src="{{asset('storage/images/train/' . $train->image)}}" width="200"/>
                     </p>
                     </div>
 
@@ -26,7 +26,12 @@
 
                     <p class="mt-2">
                         {{Str::limit($train->cargo), 200}}
-                     </p>
+                    </p>
+
+                    <p class="mt-2">
+                        Owned by {{$train->user->name}}
+                    </p>
+
                     </div>
 
                     <span class="block mt-4 text-sm opacity-70"> {{$train->updated_at->diffForHumans()}}</span>

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\destination;
@@ -23,7 +23,7 @@ class DriverController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $user->authorizeRoles('admin');
+        $user->authorizeRoles('user');
 
         $drivers = driver::with('user')->get();
         $drivers = driver::all();
@@ -34,7 +34,7 @@ class DriverController extends Controller
         $drivers = Driver::paginate(10);
 
         //brings the user to the index page along with the linked in drivers
-        return view('admin.drivers.index')->with('drivers', $drivers);
+        return view('user.drivers.index')->with('drivers', $drivers);
     }
 
     /**
@@ -48,7 +48,7 @@ class DriverController extends Controller
       public function show(Driver $driver)
      {
         $user = Auth::user();
-        $user->authorizeRoles('admin');
+        $user->authorizeRoles('user');
 
         $drivers = driver::with('train')->get();
         //checks that the drivers are the property of the user otheir wise it calls a 403 error
@@ -58,6 +58,6 @@ class DriverController extends Controller
         }
         $trains = train::with('destination')->with('driver')->get();
         //opens up the show page for the user
-        return view('admin.drivers.show')->with('driver', $driver);
+        return view('user.drivers.show')->with('driver', $driver);
     }
 }

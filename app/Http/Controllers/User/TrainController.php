@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\destination;
@@ -23,7 +23,7 @@ class TrainController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $user->authorizeRoles('admin');
+        $user->authorizeRoles('user');
         $trains = train::with('user')->get();
         $trains = train::all();
         //authenticates the trains to their latest update in pages of 5
@@ -33,7 +33,7 @@ class TrainController extends Controller
         $trains = Train::paginate(10);
 
         //brings the user to the index page along with the linked in trains
-        return view('admin.trains.index')->with('trains', $trains);
+        return view('user.trains.index')->with('trains', $trains);
     }
 
     /**
@@ -47,7 +47,7 @@ class TrainController extends Controller
     public function show(Train $train)
     {
         $user = Auth::user();
-        $user->authorizeRoles('admin');
+        $user->authorizeRoles('user');
 
         $trains = train::with('destination')->with('driver')->get();
         //checks that the trains are the property of the user otheir wise it calls a 403 error
@@ -57,6 +57,6 @@ class TrainController extends Controller
         }
 
         //opens up the show page for the user
-        return view('admin.trains.show')->with('train', $train);
+        return view('user.trains.show')->with('train', $train);
     }
 }
